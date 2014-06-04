@@ -117,6 +117,10 @@ def main(argv):
 				args.append(line.replace('\n',''))
 
 	shortcode = S.join(args,',')
+	if shortcode == '':
+		print u'暂时请通过命令行运行'
+		raw_input()
+		sys.exit(0)
 	if interval is not None:
 		myModel = HTML_Model(shortcode,interval)
 	else:	
