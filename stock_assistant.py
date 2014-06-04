@@ -90,7 +90,7 @@ def help():
 	print u"-f --file				get the stock codes from a file"
 
 def version():
-	print 'v0.1 at 2014-6-4'
+	print 'v0.11 at 2014-6-4'
 
 def main(argv):
 	try:
@@ -115,19 +115,18 @@ def main(argv):
 			lines = open(v,'r').readlines()
 			for line in lines:				
 				args.append(line.replace('\n',''))
-
+	if args == None or args == [] or args == "":
+		args = []
+		lines = open(sys.path[0]+'/sample','r').readlines()
+		for line in lines:
+			args.append(line.replace('\n',''))
 	shortcode = S.join(args,',')
-	if shortcode == '':
-		print u'暂时请通过命令行运行'
-		raw_input()
-		sys.exit(0)
 	if interval is not None:
 		myModel = HTML_Model(shortcode,interval)
 	else:	
 		myModel = HTML_Model(shortcode)
 	myModel.Start()
 if __name__ == '__main__':
-
 	main(sys.argv)
 
 	
