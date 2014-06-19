@@ -16,6 +16,7 @@ import time
 import string as S
 import getopt
 import thread
+import ConfigParser
 try:
 	from colorama import init,Fore
 except Exception, e:
@@ -105,13 +106,17 @@ def help():
 #---------------------------------------
 """
 	print u"usage: python stock_assistant.py sh600000 sh600001"
-	print u"-i --interval			set interval,default is 30 sec"
+	print u"-i --interval			set interval,default in stock_assistant.ini"
 	print u"-f --file				get the stock codes from a file"
 
 def version():
 	print 'v0.11 at 2014-6-4'
 
 def main(argv):
+	cf = ConfigParser.ConfigParser()
+	cf.read(sys.path[0]+"/stock_assistant.ini")
+	cf_file = "/"+cf.get("conf","file")
+	cf_interval = int(cf.get("conf","interval"))
 	try:
 		opts,args = getopt.getopt(argv[1:],"vhf:i:",["version","help","file=","interval="])
 	except getopt.GetoptError, e:
@@ -136,14 +141,14 @@ def main(argv):
 				args.append(line.replace('\n',''))
 	if args == None or args == [] or args == "":
 		args = []
-		lines = open(sys.path[0]+'/sample','r').readlines()
+		lines = open(sys.path[0]+cf_file,'r').readlines()
 		for line in lines:
 			args.append(line.replace('\n',''))
 	shortcode = S.join(args,',')
 	if interval is not None:
 		myModel = HTML_Model(shortcode,interval)
 	else:	
-		myModel = HTML_Model(shortcode)
+		myModel = HTML_Model(shortcode,cf_interval)
 	myModel.Start()
 if __name__ == '__main__':
 	main(sys.argv)
