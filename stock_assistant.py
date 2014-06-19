@@ -16,6 +16,7 @@ import time
 import string as S
 import getopt
 import thread
+import platform
 import ConfigParser
 try:
 	from colorama import init,Fore
@@ -25,6 +26,7 @@ except Exception, e:
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
+os_type = str(platform.system())
 init(autoreset=True)
 colorlist = [Fore.RED,Fore.GREEN,Fore.WHITE] 
 #----------- 处理页面上的各种标签 -----------
@@ -70,7 +72,10 @@ class HTML_Model:
 		myUrl = 'http://qt.gtimg.cn/q=' + self.shortcode
 		req = urllib2.Request(myUrl,headers = headers)
 		myResponse = urllib2.urlopen(req)
-		UnicodePage = myResponse.read().decode('gbk').encode('utf-8')
+		if os_type == 'Windows':
+			UnicodePage = myResponse.read()
+		else:
+			UnicodePage = myResponse.read().decode('gbk').encode('utf-8')
 		# 匹配股票数据
 		myItems = re.findall('v_(.*?)=".*?~(.*?)~\d+~(.*?)~(.*?)~.*?;',UnicodePage,re.S)
 		print "	      -----------%s-----------"%(time.asctime(time.localtime()))
