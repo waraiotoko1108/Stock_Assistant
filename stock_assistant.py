@@ -3,7 +3,7 @@
 #   程序：stock_assistant
 #   版本：0.1 
 #   作者：glx
-#   日期：2014-06-04 
+#   开始日期：2014-06-04 
 #   语言：Python 2.7 
 #   功能：方便上班时看股票
 #---------------------------------------
@@ -16,10 +16,16 @@ import time
 import string as S
 import getopt
 import thread
+try:
+	from colorama import init,Fore
+except Exception, e:
+	print '%s\n%s'%("I want module colorama.","Please try pip install colorama.")
+	exit(0)
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
-
+init(autoreset=True)
+colorlist = [Fore.RED,Fore.GREEN,Fore.WHITE] 
 #----------- 处理页面上的各种标签 -----------
 class HTML_Tool:
     # 用非 贪婪模式 匹配 \t 或者 \n 或者 空格 或者 超链接 或者 图片
@@ -75,7 +81,13 @@ class HTML_Model:
 			perc = format(delta / float(result[3]),'.2%')
 			if perc[0] != '-':
 				perc = '+'+perc
-			print "		%8s %8s %10s %+6.2f %-s\n"%(result[0],result[1],result[2],delta,perc)
+			if delta > 0:
+				flag = 0
+			elif delta < 0 :
+				flag = 1
+			else :
+				flag = 2
+			print "		%8s %8s %10s %+6.2f %-s\n"%(result[0],colorlist[flag]+result[1],result[2],delta,perc)
 
 	def Start(self):
 		self.enable = True
