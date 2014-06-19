@@ -65,10 +65,17 @@ class HTML_Model:
 		myResponse = urllib2.urlopen(req)
 		UnicodePage = myResponse.read()
 		# 匹配股票数据
-		myItems = re.findall('v_(.*?)="1~(.*?)~\d+~(.*?)~.*?;',UnicodePage,re.S)
-		print "--------%s-----------"%(time.asctime(time.localtime()))
+		myItems = re.findall('v_(.*?)=".*?~(.*?)~\d+~(.*?)~(.*?)~.*?;',UnicodePage,re.S)
+		print "	      -----------%s-----------"%(time.asctime(time.localtime()))
+		print "		%-8s %-8s %-10s %-+6s %-s\n"%('Symbol','Name','Last Trade','Change','Chg')
 		for result in myItems:
-			print "###%s###\n  %s\n  %s\n"%(result[0],result[1],result[2])
+			# print result
+			# print "###%s###\nname	%s\ncurr	%s\nperc	%.2f\n"%(result[0],result[1],result[2],float(result[2])-float(result[3]))
+			delta = float(result[2])-float(result[3])
+			perc = format(delta / float(result[3]),'.2%')
+			if perc[0] != '-':
+				perc = '+'+perc
+			print "		%8s %8s %10s %+6.2f %-s\n"%(result[0],result[1],result[2],delta,perc)
 
 	def Start(self):
 		self.enable = True
