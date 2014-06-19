@@ -70,7 +70,7 @@ class HTML_Model:
 		myUrl = 'http://qt.gtimg.cn/q=' + self.shortcode
 		req = urllib2.Request(myUrl,headers = headers)
 		myResponse = urllib2.urlopen(req)
-		UnicodePage = myResponse.read()
+		UnicodePage = myResponse.read().decode('gbk').encode('utf-8')
 		# 匹配股票数据
 		myItems = re.findall('v_(.*?)=".*?~(.*?)~\d+~(.*?)~(.*?)~.*?;',UnicodePage,re.S)
 		print "	      -----------%s-----------"%(time.asctime(time.localtime()))
@@ -89,6 +89,7 @@ class HTML_Model:
 			else :
 				flag = 2
 			print "		%8s %8s %10s %+6.2f %-s\n"%(result[0],colorlist[flag]+result[1],result[2],delta,perc)
+
 
 	def Start(self):
 		self.enable = True
