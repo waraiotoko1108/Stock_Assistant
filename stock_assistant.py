@@ -110,9 +110,10 @@ def help():
 	print u"-f --file				get the stock codes from a file"
 
 def version():
-	print 'v0.11 at 2014-6-4'
+	print 'v0.14 at 2014-6-19'
 
 def main(argv):
+	# 读取ini配置文件
 	cf = ConfigParser.ConfigParser()
 	cf.read(sys.path[0]+"/stock_assistant.ini")
 	cf_file = "/"+cf.get("conf","file")
@@ -123,7 +124,6 @@ def main(argv):
 		print e
 		sys.exit(2)
 	interval = None
-	# shortcode = S.join(args,',')
 	for o,v in opts:
 		if o in ('-v','--version'):
 			version()

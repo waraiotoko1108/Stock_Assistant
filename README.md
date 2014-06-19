@@ -1,7 +1,7 @@
-Stock_Assistant
+﻿Stock_Assistant
 ===============
 ##Stock Assistant是什么?
-一个抓股票数据的Python脚本，使用Tencent的证券API。当前版本是0.1，缓慢开发中。
+一个抓股票数据的Python脚本，使用Tencent的证券API。当前版本是0.1，缓慢开发中。依赖colorama模块
 
 
 ##Stock Assistant现在有哪些功能？
@@ -9,6 +9,8 @@ Stock_Assistant
 * 设置抓取间隔
 * 从文本文件读取股票代码
 
-##USAGE
+##Dependencies
+
+* colorama	>=	0.3.1
 
 python stock_assistant.py sh600000 sh600001
