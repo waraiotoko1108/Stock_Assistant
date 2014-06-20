@@ -11,6 +11,6 @@ Stock_Assistant
 
 ##USAGE
 
-`python stock_assistant.py sh600577 sh600011 sh600001`
-
-(http://i.imgur.com/WeXFkWn.jpg)
+`python stock_assistant.py sh600577 sh600011 sh600001`  
+Sample:  
+![Sample](http://tu.nmzh.net/di-ZUC2.png)
