@@ -9,6 +9,11 @@ Stock_Assistant
 * 设置抓取间隔
 * 从文本文件读取股票代码
 
+##Dependencies
+
+* Python 2.7.x
+* colorama >= 0.2.5
+
 ##USAGE
 
 命令行输入`python stock_assistant.py sh600577 sh600011 sh600001`  
