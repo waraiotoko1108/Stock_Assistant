@@ -11,6 +11,7 @@ Stock_Assistant
 
 ##USAGE
 
-`python stock_assistant.py sh600577 sh600011 sh600001`  
+命令行输入`python stock_assistant.py sh600577 sh600011 sh600001`  
+或者在sample文件中写入股票代码，在图形界面下执行。  
 Sample:  
 ![Sample](http://tu.nmzh.net/di-ZUC2.png)
