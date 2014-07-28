@@ -101,6 +101,13 @@ class HTML_Model:
 		while self.enable == True:
 			self.GetPage()
 			time.sleep(self.interval)
+			if(time.strftime("%a",time.localtime()) in ['Sun','Sat']):
+				print "%35s"%(u'今朝伐开')
+				exit();
+			elif(int(time.strftime("%H",time.localtime())) < 9 or int(time.strftime("%H",time.localtime())) > 15):
+				print "%35s"%(u'辰光伐对')
+				exit();			
+
 
 def help():
 	print u"""
